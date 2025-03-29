@@ -57,9 +57,10 @@ f0method_info = "PM is fast, Harvest is good but extremely slow, and Crepe effec
 if os.path.isfile("rmvpe.pt"):
     f0method_mode.insert(2, "rmvpe")
     f0method_info = "PM is fast, Harvest is good but extremely slow, Rvmpe is alternative to harvest (might be better), and Crepe effect is good but requires GPU (Default: PM)"
-
+import fairseq
 def load_hubert():
     global hubert_model
+    torch.serialization.add_safe_globals([fairseq.data.dictionary.Dictionary])
     models, _, _ = checkpoint_utils.load_model_ensemble_and_task(
         ["hubert_base.pt"],
         suffix="",
